@@ -1,6 +1,6 @@
 import { Handle, Position } from 'reactflow';
 import "./customNode.css"
-export function TextUpdaterNode({ data }) {
+export function TextUpdaterNode({ data }: any) {
  
   return (
     <>
