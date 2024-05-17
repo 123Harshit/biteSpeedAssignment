@@ -1,0 +1,17 @@
+.node-main-section{
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 5px;
+}
+
+.header{
+    background-color: aquamarine;
+    color: black;
+    font-weight: bold;
+    border-radius: inherit;
+    padding: 2px 8px;
+}
+
+.content{
+    padding: 2px 8px;
+}

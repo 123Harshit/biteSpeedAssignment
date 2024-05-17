@@ -1,0 +1,23 @@
+.settings-panel-header{
+    border-bottom: 1px solid lightslategray;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+}
+
+.back-button{
+    border: none;
+    background: none;
+    flex: 0.1;
+}
+.message{
+    flex: 0.9;
+    text-align: center;
+}
+
+.text-container{
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid lightslategray;
+}
