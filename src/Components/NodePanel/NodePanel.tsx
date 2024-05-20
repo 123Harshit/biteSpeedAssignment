@@ -8,7 +8,7 @@ function NodePanel({clearFlow}: any) {
             <p>Message</p>  
         </div>
         <div className='straight-line'></div>
-        <button className='clear-flow-button' onClick={clearFlow}>Clear All Nodes</button>
+        <button className='clear-flow-button' onClick={clearFlow}>Clear Current Flow</button>
     </div>
   )
 }

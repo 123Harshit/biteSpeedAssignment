@@ -1,54 +1,12 @@
-![](https://github.com/xyflow/web/blob/main/assets/codesandbox-header-ts.png?raw=true)
-
-# React Flow starter (Vite + TS)
-
-We've put together this template to serve as a starting point for folks
-interested in React Flow. You can use this both as a base for your own React
-Flow applications, or for small experiments or bug reports.
-
-**TypeScript not your thing?** We also have a vanilla JavaScript starter template,
-just for you!
-
-## Getting up and running
-
-You can get this template without forking/cloning the repo using `degit`:
-
-```bash
-npx degit xyflow/vite-react-flow-template your-app-name
-```
-
-The template contains mostly the minimum dependencies to get up and running, but
-also includes eslint and some additional rules to help you write React code that
-is less likely to run into issues:
-
-```bash
-npm install # or `pnpm install` or `yarn install`
-```
-
-Vite is a great development server and build tool that we recommend our users to
-use. You can start a development server with:
-
-```bash
+How to run the app - 
+npm install
 npm run dev
-```
 
-While the development server is running, changes you make to the code will be
-automatically reflected in the browser!
 
-## Things to try:
+Deployed APP link - https://bite-speed-assignment-blue.vercel.app/
 
-- Create a new custom node inside `src/nodes/` (don't forget to export it from `src/nodes/index.ts`).
-- Change how things look by [overriding some of the built-in classes](https://reactflow.dev/learn/customization/theming#overriding-built-in-classes).
-- Add a layouting library to [position your nodes automatically](https://reactflow.dev/learn/layouting/layouting)
-
-## Resources
-
-Links:
-
-- [React Flow - Docs](https://reactflow.dev)
-- [React Flow - Discord](https://discord.com/invite/Bqt6xrs)
-
-Learn:
-
-- [React Flow – Custom Nodes](https://reactflow.dev/learn/customization/custom-nodes)
-- [React Flow – Layouting](https://reactflow.dev/learn/layouting/layouting)
+Key Points - 
+1. I have used local storage to save and retrieve the latest flow created by user in case they close the tab/browser and want to retrieve the old flow.
+2. I have used an error state to display errors while saving the flow in case any exist and they will be automatically disappearing in 3s.
+3. There is a button you will find in "Nodes Panel" below "Message" Node named "Clear Current Flow" which deleted the existing flow and gives you a empty area to restart.
+4. While creating new nodes if you are not positioning them after creation then they will be created on top of each other as I am not giving the x, y coordinates while creating the nodes.

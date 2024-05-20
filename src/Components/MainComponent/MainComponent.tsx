@@ -18,7 +18,7 @@ import {
 } from "reactflow";
 
 import "reactflow/dist/style.css";
-import { TextUpdaterNode } from "../../nodes/customNode";
+import { TextUpdaterNode } from "../../nodes/TextUpdaterNode";
 import SettingsPanel from "../SettingsPanel/SettingsPanel";
 import NodePanel from "../NodePanel/NodePanel";
 
@@ -26,14 +26,21 @@ export default function MainComponent() {
   // we define the nodeTypes outside of the component to prevent re-renderings
   // you could also use useMemo inside the component
   const nodeTypes = useMemo(() => ({ textUpdater: TextUpdaterNode }), []);
+
+  // state to keep track of current nodes and edges and to update them
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+
+  // state to switch between Nodes and Settings panel
   const [nodeSelected, setNodeSelected] = useState(false);
   const [selectedNode, setSelectedNode] = useState<any>(null);
   const [editNodeVal, setEditNodeVal] = useState<String>("");
+
+  // state to show the particular error message
   const [error, setError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<String>("");
 
+  // to check if there is already a flow existing in the browser
   useEffect(() => {
     if (localStorage.getItem("nodes")) {
       setNodes(JSON.parse(localStorage.getItem("nodes") || ""));
@@ -41,10 +48,12 @@ export default function MainComponent() {
     }
   }, []);
 
+  // called when user want to create an edge between two nodes
   const onConnect: OnConnect = useCallback(
     (connection) => {
       setEdges((edges) => {
         let sourceEdgeExist = edges.find((edge)=> edge.source === connection.source);
+        // to fulfill the condition that there can only be one edge coming from a source node
         if(sourceEdgeExist!==undefined){
             setErrorMessage("Cannot have multiple edges from a single source")
             setError(true)
@@ -59,6 +68,7 @@ export default function MainComponent() {
     [setEdges]
   );
 
+  // called when user want to create a node by dragging and dropping the Message button from Nodes panel
   const onNodeAdd = useCallback(
     () =>
       setNodes((prevNodes) => {
@@ -76,6 +86,7 @@ export default function MainComponent() {
     [setNodes]
   );
 
+  // called when user clicks on a node
   const nodeClicked = (
     _: MouseEvent,
     n: any
@@ -84,10 +95,12 @@ export default function MainComponent() {
     setNodeSelected(true);
   };
 
+  // called when user edits a node
   const onNodeEdit = (val: String) => {
     setEditNodeVal(val);
   };
 
+  // to check if the existing flow is good to save
   const checkIfFlowIsGood = () => {
     if (nodes.length === 0) {
       return false;
@@ -95,7 +108,6 @@ export default function MainComponent() {
     let allTargets: any = [];
     edges.map((edge) => allTargets.push(edge.target));
     let count = 0;
-    console.log(allTargets);
 
     for (let i = 0; i < nodes.length; i++) {
       if (allTargets.indexOf(nodes[i].id) == -1) {
@@ -111,6 +123,7 @@ export default function MainComponent() {
     return true;
   };
 
+  // called when user want to save the changes made in the flow
   const saveChanges = () => {
     if (nodeSelected && selectedNode) {
       if (checkIfFlowIsGood()) {
@@ -150,12 +163,14 @@ export default function MainComponent() {
     }
   };
 
+  // called when user wants to clear the localstorage (means existing flow)
   const clearFlow = () => {
     localStorage.clear();
     setNodes([]);
     setEdges([]);
   };
 
+  // called when user clicks on back button(arrow icon) in Settings Panel
   const settingsPanelBackClicked = () => {
     setSelectedNode(null);
     setNodeSelected(false);
